@@ -9,22 +9,30 @@ class SearchZipCodeController = _SearchZipCodeControllerBase
 abstract class _SearchZipCodeControllerBase with Store{
   final SearchByZipcode usecase;
   _SearchZipCodeControllerBase(this.usecase);
+  ResultSearchModel resultSearchModel;
 
   @observable
   String zipcode_text = '';
 
   @action
   getZipcode(String zipcode) async {
-    zipcode_text = 'buscando...';
-    final result = await usecase(zipcode);
-    final ResultSearchModel resultSearchModel = result.getOrElse(null);
-     zipcode_text = "Address :\n" +
-         resultSearchModel.logradouro +
-         '\n' +
-         resultSearchModel.bairro +
-         '\n' +
-         resultSearchModel.localidade +
-         '/' +
-         resultSearchModel.uf ;
+    if(zipcode.isNotEmpty && zipcode!=null){
+
+      zipcode_text = 'loading...';
+      final result = await usecase(zipcode);
+      result.fold(
+              (l) => zipcode_text='Error: Verifique o CEP e tente novamente',
+              (r) {
+                resultSearchModel = result.getOrElse(null);
+                zipcode_text = "Address :\n" +
+                resultSearchModel.logradouro +
+                '\n' +
+                resultSearchModel.bairro +
+                '\n' +
+                resultSearchModel.localidade +
+                '/' +
+                resultSearchModel.uf ;
+              });
+    }
   }
 }

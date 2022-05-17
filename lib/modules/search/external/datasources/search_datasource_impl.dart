@@ -12,7 +12,7 @@ class SearchDataSourceImpl implements SearchDatasource{
   Future<ResultSearchModel> getSearch(String zipcode) async{
     final response = await dio.get('https://viacep.com.br/ws/${zipcode.replaceAll('-', '')}/json/');
 
-    if(response.statusCode==200){
+    if(response.statusCode==200 && response.data['erro']!='true'){
       return ResultSearchModel.fromMap(response.data);
     }else{
       throw DataSourceError();
