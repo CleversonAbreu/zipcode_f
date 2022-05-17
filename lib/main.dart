@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Home.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:zipcodef/app_module.dart';
 
-void main() => runApp(
-    MaterialApp(
-      home:Home(),
-      debugShowCheckedModeBanner: false,
-    )
-);
+void main() {
+  runApp(ModularApp(module:AppModule()));
+}
