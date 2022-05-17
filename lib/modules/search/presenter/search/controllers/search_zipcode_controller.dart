@@ -15,6 +15,7 @@ abstract class _SearchZipCodeControllerBase with Store{
 
   @action
   getZipcode(String zipcode) async {
+    zipcode_text = 'buscando...';
     final result = await usecase(zipcode);
     final ResultSearchModel resultSearchModel = result.getOrElse(null);
      zipcode_text = "Address :\n" +
