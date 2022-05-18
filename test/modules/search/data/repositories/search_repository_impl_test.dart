@@ -12,19 +12,19 @@ class SearchDataSourceMock extends Mock implements SearchDatasource{}
 void main(){
   final datasource        = SearchDataSourceMock();
   final repository        = SearchRepositorImp(datasource);
-  final resultSearchModel = ResultSearchModel(cep: 'null', localidade: 'null', uf: 'null', logradouro: 'null', bairro: 'null');
+  final resultSearchModel = ResultSearchModel(zipcode: '83601-680', address: 'Rua Atílio Rivabem', state: 'PR', city: 'Campo Largo', district: 'Vila Bancária');
 
   test('Should returns ResultSearchModel',() async{
       when(datasource.getSearch(any))
           .thenAnswer((realInvocation) async=> resultSearchModel);
-      final result = await repository.search('83601360');
+      final result = await repository.search('83601-680');
       expect(result.getOrElse(() => null) ,isA<ResultSearchModel>());
   });
 
   test('Should returns a DataSource error if datasource fails',() async{
     when(datasource.getSearch(any)).thenThrow(Exception());
 
-    final result = await repository.search('83601360');
+    final result = await repository.search('83601-680');
     expect(result.fold((l) => l, (r) => r),isA<DataSourceError>());
   });
 }

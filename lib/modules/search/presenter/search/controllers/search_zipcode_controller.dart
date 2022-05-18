@@ -18,20 +18,20 @@ abstract class _SearchZipCodeControllerBase with Store{
   getZipcode(String zipcode) async {
     if(zipcode.isNotEmpty && zipcode!=null){
 
-      zipcode_text = 'loading...';
+      zipcode_text = 'carregando...';
       final result = await usecase(zipcode);
       result.fold(
-              (l) => zipcode_text='Error: Verifique o CEP e tente novamente',
+              (l) => zipcode_text='Erro: Verifique o CEP e tente novamente',
               (r) {
                 resultSearchModel = result.getOrElse(null);
-                zipcode_text = "Address :\n" +
-                resultSearchModel.logradouro +
+                zipcode_text = "Endereço :\n" +
+                resultSearchModel.address +
                 '\n' +
-                resultSearchModel.bairro +
+                resultSearchModel.district +
                 '\n' +
-                resultSearchModel.localidade +
+                resultSearchModel.city +
                 '/' +
-                resultSearchModel.uf ;
+                resultSearchModel.state ;
               });
     }
   }

@@ -55,7 +55,7 @@ class _SearchPageState extends State<SearchPage> {
                     Padding(
                       padding: EdgeInsets.only(top: 20),
                       child: RaisedButton(
-                        child: Text('Search',
+                        child: Text('Buscar',
                             style: TextStyle(fontSize: 20, color: Colors.white)),
                         color: Colors.orange,
                         padding: EdgeInsets.fromLTRB(30, 15, 30, 15),

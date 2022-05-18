@@ -3,32 +3,32 @@ import 'package:zipcodef/modules/search/domain/entities/result_search_entity.dar
 import 'package:meta/meta.dart';
 
 class ResultSearchModel extends ResultSearchEntity{
-  final String cep;
-  final String logradouro;
-  final String uf;
-  final String localidade;
-  final String bairro;
+  final String zipcode;
+  final String address;
+  final String state;
+  final String city;
+  final String district;
 
-  ResultSearchModel({@required this.cep,@required this.logradouro,@required this.uf,@required this.localidade,@required this.bairro});
+  ResultSearchModel({@required this.zipcode,@required this.address,@required this.state,@required this.city,@required this.district});
 
   Map<String,dynamic> toMap(){
     return {
-      'zipcode':zipcode,
-      'address':logradouro,
-      'state':uf,
-      'city':localidade,
-      'district':bairro
+      'cep':zipcode,
+      'address':address,
+      'state':state,
+      'city':city,
+      'district':district
     };
   }
 
   static ResultSearchModel fromMap(Map<String,dynamic>map){
     if(map==null) return null;
     return ResultSearchModel(
-      cep:map['cep'],
-      logradouro:map['logradouro'],
-      uf: map['uf'],
-      localidade: map['localidade'],
-      bairro: map['bairro']
+        zipcode:map['cep'],
+        address:map['logradouro'],
+        state: map['uf'],
+        city: map['localidade'],
+        district: map['bairro']
     );
   }
   String toJson()=> json.encode(toMap());
